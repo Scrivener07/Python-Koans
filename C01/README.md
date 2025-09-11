@@ -1,22 +1,23 @@
-# M01 Unit Exercise: Data Types, Variables, and Basic Operations
-Welcome to your first **unit exercise**!
-This assignment is designed to help you practice Python basics: data types, variables, arithmetic, string operations, and type conversion.
+# C01 Exercise: Data Types, Variables, and Basic Operations
+Welcome to your first exercise!
+
+This exercise is designed to help you practice Python basics: data types, variables, arithmetic, string operations, and type conversion.
 
 ---
 
 ## What do I do?
 Read *[M00: Getting Started](../M00/README.md)* to learn how these challenges work.
 
-Start by reading the **module 1** lesson material on Canvas.
-Lesson material contains explanations and examples of all the Python concepts you need for this assignment.
+Start by reading the **lesson 1** study material provided by your instructor.
+Lesson material contains explanations and examples of all the Python concepts you need for this exercise.
 
 Here is a general outline of steps you will follow:
-1. Read the lesson material on Canvas.
+1. Read the lesson material on provided by your instructor.
 2. Download and open the provided exercise files in your code editor.
 3. Complete each challenge in `exercise.py`.
 4. Run the unit tests in VS Code or on the command line.
 5. Fix any errors and repeat until all tests pass.
-6. Submit your `exercise.py` assignment file.
+6. Submit your `exercise.py` file.
 
 ---
 
@@ -43,7 +44,7 @@ Each Python project exercise will contain three important files:
 
 
 ## Submission
-Submit only your `exercise.py` file and a screenshot of your passing tests to Canvas.
+Submit only your `exercise.py` file and a screenshot of your passing tests to your instructor.
 
 
 ## Tips for Success

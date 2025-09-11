@@ -1,86 +1,174 @@
 """
-Welcome to the module 1 unit exercise.
+Welcome to koan exercise 1.
 
 Please provide a solution for each coding challenge.
 """
+from koans import koan
 
 
-# Data Types and Variables
-def get_boolean():
-    """Return a `true` boolean value."""
+# Challenge 1
+#--------------------------------------------------
+@koan
+def challenge_01():
+    """
+    Return a `true` boolean value.
+    """
     return True
 
 
-def get_integer():
-    """Return the integer value `42`."""
+# Challenge 2
+#--------------------------------------------------
+@koan
+def challenge_02():
+    """
+    Return the integer value `42`.
+    """
     return 42
 
 
-def get_float():
-    """Return the float value `3.14`."""
+# Challenge 3
+#--------------------------------------------------
+@koan
+def challenge_03():
+    """
+    Return the float value `3.14`.
+    """
     return 3.14
 
 
-def get_string():
-    """Return the string value `Hello, World!`."""
+# Challenge 4
+#--------------------------------------------------
+@koan
+def challenge_04():
+    """
+    Return the string value `Hello, World!`.
+    """
     return "Hello, World!"
 
 
-# Arithmetic Operations
-def add(x, y):
-    """Return the value of `x` and `y` summed."""
+# Challenge 5
+#--------------------------------------------------
+@koan
+def challenge_05(x, y):
+    """
+    Return the value of `x` and `y` summed.
+    """
     return x + y
 
-def subtract(x, y):
-    """Return the value of `x` and `y` subtracted."""
+
+# Challenge 6
+#--------------------------------------------------
+@koan
+def challenge_06(x, y):
+    """
+    Return the value of `x` and `y` subtracted.
+    """
     return x - y
 
-def multiply(x, y):
-    """Return the value of `x` and `y` multiplied."""
+
+# Challenge 7
+#--------------------------------------------------
+@koan
+def challenge_07(x, y):
+    """
+    Return the value of `x` and `y` multiplied.
+    """
     return x * y
 
-def divide(x, y):
-    """Return the value of `x` divided by `y`."""
+
+# Challenge 8
+#--------------------------------------------------
+@koan
+def challenge_08(x, y):
+    """
+    Return the value of `x` divided by `y`.
+    """
     return x / y
 
-def modulo(x, y):
-    """Return the value of `x` modulo `y`."""
+
+# Challenge 9
+#--------------------------------------------------
+@koan
+def challenge_09(x, y):
+    """
+    Return the value of `x` modulo `y`.
+    """
     return x % y
 
-def exponentiate(base, exp):
-    """Return the value of `base` raised to the power of `exp`."""
+
+# Challenge 10
+#--------------------------------------------------
+@koan
+def challenge_10(base, exp):
+    """
+    Return the value of `base` raised to the power of `exp`.
+    """
     return base ** exp
 
 
-# String Operations
-def concatenate(text_1, text_2):
-    """Return the concatenation of `text_1` and `text_2`."""
+# Challenge 11
+#--------------------------------------------------
+@koan
+def challenge_11(text_1, text_2):
+    """
+    Return the concatenation of `text_1` and `text_2`.
+    """
     return text_1 + text_2
 
-def repeat_string(text, number):
-    """Return the string `text` repeated `number` times."""
+
+# Challenge 12
+#--------------------------------------------------
+@koan
+def challenge_12(text, number):
+    """
+    Return the string `text` repeated `number` times.
+    """
     return text * number
 
 
-# Type Conversion
-def str_to_int(text):
-    """Return the given `str` value as a `int` type value."""
+# Challenge 13
+#--------------------------------------------------
+@koan
+def challenge_13(text):
+    """
+    Return the given `str` value as a `int` type value.
+    """
     return int(text)
 
-def str_to_float(text):
-    """Return the given `str` value as a `float` type value."""
+
+# Challenge 14
+#--------------------------------------------------
+@koan
+def challenge_14(text):
+    """
+    Return the given `str` value as a `float` type value.
+    """
     return float(text)
 
-def int_to_str(value_int):
-    """Return the given `int` value as a `str` type value."""
+
+# Challenge 15
+#--------------------------------------------------
+@koan
+def challenge_15(value_int):
+    """
+    Return the given `int` value as a `str` type value.
+    """
     return str(value_int)
 
-def float_to_str(value_float):
-    """Return the given `float` value as a `str` type value."""
+
+# Challenge 16
+#--------------------------------------------------
+@koan
+def challenge_16(value_float):
+    """
+    Return the given `float` value as a `str` type value.
+    """
     return str(value_float)
 
 
-# Standard Input/Output
-def console_print_hello():
-    """Print the message 'Hello, World!' to console exactly as shown using the `print()` function."""
+# Challenge 17
+#--------------------------------------------------
+@koan
+def challenge_17():
+    """Print the message `Hello, World!` to console exactly as shown using the `print()` function."""
     print("Hello, World!")

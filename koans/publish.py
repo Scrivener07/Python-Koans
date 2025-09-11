@@ -55,6 +55,18 @@ class Syntax:
         return decorators
 
 
+
+class Text:
+
+    @staticmethod
+    def indent_at(lines:list[str], index:int) -> int:
+        """
+        Gets the indentation level of the line at the given index.
+        """
+        return len(lines[index]) - len(lines[index].lstrip())
+
+
+
 class Publish:
 
     @staticmethod
@@ -93,10 +105,7 @@ class Publish:
     def strip_imports(lines:list[str], koan_imports:list[ast.Import]) -> None:
         line_indexes:list[int] = []
         for koan_import in koan_imports:
-            print(f"Koan import on line number {koan_import.lineno}")
             line_indexes.append(koan_import.lineno - 1)
-
-        # Remove in reverse order to avoid messing up line numbers.
         for index in sorted(line_indexes, reverse=True):
             lines[index] = ""
 
@@ -105,10 +114,7 @@ class Publish:
     def strip_decorators(lines:list[str], koan_decorators:list[ast.expr]) -> None:
         line_indexes:list[int] = []
         for koan_decorator in koan_decorators:
-            print(f"Koan decorator on line number {koan_decorator.lineno}")
             line_indexes.append(koan_decorator.lineno - 1)
-
-        # Remove in reverse order to avoid messing up line numbers.
         for index in sorted(line_indexes, reverse=True):
             lines[index] = ""
 
@@ -116,62 +122,55 @@ class Publish:
     @staticmethod
     def stub_functions(lines:list[str], koan_functions:list[ast.FunctionDef]) -> None:
         for koan_function in sorted(koan_functions, key=lambda function: function.lineno, reverse=True):
-            print(f"Koan function on line number {koan_function.lineno}")
-            Publish.stub_function(lines, koan_function.lineno-1, koan_function.name)
+            Publish.stub_function(lines, koan_function)
 
 
     @staticmethod
-    def stub_function(lines:list[str], line_index:int, function_name:str) -> None:
-        lines_new:list[str] = []
-        index:int = line_index
-        indentation:int|None = None
-        has_function:bool = False
-        start_index = line_index
-        while index < len(lines):
-            line:str = lines[index]
-            if not has_function:
-                if line.lstrip().startswith(f"def {function_name}("):
-                    has_function = True
-                    indentation = len(line) - len(line.lstrip())
-                    lines_new.append(line)
-                    index += 1
+    def stub_function(lines:list[str], function:ast.FunctionDef) -> None:
+        # Store the first and last line index of the function definition.
+        first:int = function.lineno - 1
+        last:int = function.end_lineno
 
-                    # Copy docstring if present
-                    if index < len(lines) and (lines[index].strip().startswith('"""') or lines[index].strip().startswith("'''")):
-                        docstring_delimiter:str = lines[index].strip()[:3]
-                        lines_new.append(lines[index])
-                        index += 1
-                        while index < len(lines):
-                            lines_new.append(lines[index])
-                            if lines[index].strip().endswith(docstring_delimiter):
-                                index += 1
-                                break
-                            index += 1
+        # Build new lines for the stubbed function.
+        stubbed:list[str] = []
 
-                    # Insert stub after docstring
-                    lines_new.append(" " * (indentation + 4) + "raise NotImplementedError()\n")
-                    lines_new.append("\n")
-                    lines_new.append("\n")
+        # The first line is the function definition.
+        stubbed.append(lines[first])
 
-                    # Skip the rest of the function body
-                    while index < len(lines):
-                        next_line:str = lines[index]
-                        if next_line.strip().startswith("def ") and (len(next_line) - len(next_line.lstrip())) <= indentation:
-                            has_function = False
-                            break
-                        if next_line.strip() and (len(next_line) - len(next_line.lstrip())) <= indentation and not next_line.strip().startswith("@"):
-                            has_function = False
-                            break
-                        index += 1
-                    break # Done processing this function
-                else:
-                    break # Should not happen, but safety
-            else:
-                raise Exception(f"Unexpected state in stub_function at index {index}.")
+        # Copy docstring if present.
+        documentation:list[str] = Publish.get_documentation(lines, function)
+        stubbed.extend(documentation)
 
-        # Replace the original function lines with the stubbed lines.
-        # The function's first and last line indexes are replaced.
-        lines[start_index:index] = lines_new
+        # Insert stub after docstring.
+        indent:int = Text.indent_at(lines, first)
+        indentation:str = " " * (indent + 4)
+        stubbed.append(f"{indentation}raise NotImplementedError()\n")
+
+        # Replace the function lines with stubbed lines.
+        lines[first:last] = stubbed
+
+
+    @staticmethod
+    def get_documentation(lines:list[str], function:ast.FunctionDef) -> list[str]:
+        first:int = function.lineno - 1
+        last:int = function.end_lineno - 1
+        documentation:list[str] = []
+        inside_block:bool = False
+        for line in lines[first:last]:
+            if inside_block:
+                documentation.append(line)
+            elif Publish.has_documentation(line):
+                inside_block = not inside_block
+                documentation.append(line)
+        return documentation
+
+
+    @staticmethod
+    def has_documentation(line:str) -> bool:
+        return line.strip().startswith('"""') \
+            or line.strip().startswith("'''") \
+            or line.strip().endswith('"""') \
+            or line.strip().endswith("'''")
 
 
 # Entry Point
@@ -183,3 +182,4 @@ if __name__ == "__main__":
     source_path:str = sys.argv[1]
     destination_path:str = sys.argv[2]
     Publish.main(source_path, destination_path)
+    print(f"\nPublished:\n- Source: '{source_path}'\n- Destination: '{destination_path}'")

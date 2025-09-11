@@ -10,15 +10,15 @@ Just focus on writing the correct code for each challenge.
 
 # Challenge 1
 #--------------------------------------------------
-# The most common type of challenge will have you `return` a value.
+# Most challenges will have you `return` a value.
 # The word `return` is a special keyword in Python written as `return <value>`.
+# The string "Hello, World!" here is the <value> for which you must return.
+#
 # You can think of the `return` keyword as how you submit your answer.
 #
 # In this first challenge, you are asked to return the string "Hello, World!".
-# There is nothing to calculate, so we can just submit the string.
-#
-# The string "Hello, World!" here is the <value> for which you must return.
-def hello_string():
+# There is nothing to calculate, so we can just submit the literal string.
+def challenge_01():
     """
     Return the string 'Hello, World!'.
     """
@@ -27,11 +27,15 @@ def hello_string():
 
 # Challenge 2: Now its your turn!
 #--------------------------------------------------
-def python_string():
+def challenge_02():
     """
-    Return the string 'Python'.
+    Return the string 'Python!'.
+
+    Hint:
+        Look at the previous challenge.
     """
     raise NotImplementedError()
+
 
 
 # Challenge 3
@@ -39,7 +43,7 @@ def python_string():
 # Sometimes a challenge won't require you to return a value at all.
 #
 # In this challenge you only need to `print()` the solution.
-def hello_print():
+def challenge_03():
     """
     Print the value 'Hello, World!'.
     """
@@ -48,11 +52,15 @@ def hello_print():
 
 # Challenge 4: Now its your turn!
 #--------------------------------------------------
-def python_print():
+def challenge_04():
     """
     Print the value 'Python!'.
+
+    Hint:
+        Look at the previous challenge.
     """
     raise NotImplementedError()
+
 
 
 # Challenge 5
@@ -64,7 +72,7 @@ def python_print():
 #
 # In this challenge, you are provided with two integers.
 # You task is to return the sum of two integers.
-def add_two_numbers(integer_a, integer_b):
+def challenge_05(integer_a, integer_b):
     """
     Return the sum of `integer_a` and `integer_b`.
     """
@@ -73,7 +81,7 @@ def add_two_numbers(integer_a, integer_b):
 
 # Challenge 6: Now its your turn!
 #--------------------------------------------------
-def subtract_two_numbers(integer_a, integer_b):
+def challenge_06(integer_a, integer_b):
     """
     Return the difference between `integer_a` and `integer_b`.
 
@@ -83,5 +91,3 @@ def subtract_two_numbers(integer_a, integer_b):
         Look at the previous challenge.
     """
     raise NotImplementedError()
-
-

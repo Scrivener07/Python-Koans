@@ -1,4 +1,4 @@
-# M00 Unit Exercise: Getting Started
+# C00 Exercise: Getting Started
 Welcome to your first unit exercise!
 This will be a primer that explains how these exercises work and how to complete them successfully.
 
@@ -10,12 +10,12 @@ These exercises use **unit testing** to automatically verify your code for corre
 When all the tests pass, you’ll know you’ve provided a correct solution.
 
 Here is a general outline of steps you will follow:
-1. Read the lesson material on Canvas.
+1. Read the lesson material on provided by your instructor.
 2. Download and open the provided exercise files in your code editor.
 3. Complete each challenge in `exercise.py`.
 4. Run the unit tests in VS Code or on the command line.
 5. Fix any errors and repeat until all tests pass.
-6. Submit your `exercise.py` assignment file.
+6. Submit your `exercise.py` file.
 
 ---
 
@@ -198,7 +198,7 @@ You will know your code is correct when all the unit tests pass with a green che
 
 
 ### 5. **Submit your code**
-Submit only your `exercise.py` file and a screenshot of your passing tests to Canvas.
+Submit only your `exercise.py` file and a screenshot of your passing tests to your instructor.
 
 
 **That’s it!**

@@ -1,56 +1,58 @@
+"""
+Provides unit testing for koan 2.
+
+Use this import to target exercise testing.
+    `from . import exercise`
+
+Use this import to target solution testing.
+    `from . import solution as exercise`
+"""
 import unittest
 #--------------------------------------------------
 from . import solution as exercise
 #--------------------------------------------------
 
-class TestM02(unittest.TestCase):
+class Testing(unittest.TestCase):
 
-    def test_add_numbers(self):
-        self.assertEqual(exercise.add_numbers(2, 3), 5)
-        self.assertEqual(exercise.add_numbers(-1, 1), 0)
-
-
-    def test_is_greater(self):
-        self.assertTrue(exercise.is_greater(5, 2))
-        self.assertFalse(exercise.is_greater(2, 5))
-        self.assertFalse(exercise.is_greater(3, 3))
+    def test_challenge_01(self):
+        self.assertEqual(exercise.challenge_01(2, 3), 5)
+        self.assertEqual(exercise.challenge_01(-1, 1), 0)
 
 
-    def test_both_true(self):
-        self.assertTrue(exercise.both_true(True, True))
-        self.assertFalse(exercise.both_true(True, False))
-        self.assertFalse(exercise.both_true(False, True))
-        self.assertFalse(exercise.both_true(False, False))
+    def test_challenge_02(self):
+        self.assertTrue(exercise.challenge_02(5, 2))
+        self.assertFalse(exercise.challenge_02(2, 5))
+        self.assertFalse(exercise.challenge_02(3, 3))
 
 
-    def test_assign_and_increment(self):
-        self.assertEqual(exercise.assign_and_increment(5), 6)
-        self.assertEqual(exercise.assign_and_increment(-1), 0)
+    def test_challenge_03(self):
+        self.assertTrue(exercise.challenge_03(True, True))
+        self.assertFalse(exercise.challenge_03(True, False))
+        self.assertFalse(exercise.challenge_03(False, True))
+        self.assertFalse(exercise.challenge_03(False, False))
 
 
-    def test_fizzbuzz(self):
-        self.assertEqual(
-            exercise.fizzbuzz(5),
-            ["1", "2", "Fizz", "4", "Buzz"]
-        )
-        self.assertEqual(
-            exercise.fizzbuzz(15)[14],
-            "FizzBuzz"
-        )
+    def test_challenge_04(self):
+        self.assertEqual(exercise.challenge_04(5), 6)
+        self.assertEqual(exercise.challenge_04(-1), 0)
 
 
-    def test_count_down(self):
-        self.assertEqual(exercise.count_down(3), [3, 2, 1])
-        self.assertEqual(exercise.count_down(1), [1])
+    def test_challenge_05(self):
+        self.assertEqual(exercise.challenge_05(5), ["1", "2", "Fizz", "4", "Buzz"])
+        self.assertEqual(exercise.challenge_05(15)[14], "FizzBuzz")
 
 
-    def test_grade_message(self):
-        self.assertEqual(exercise.grade_message(95), "Excellent")
-        self.assertEqual(exercise.grade_message(80), "Good")
-        self.assertEqual(exercise.grade_message(65), "Pass")
-        self.assertEqual(exercise.grade_message(50), "Fail")
+    def test_challenge_06(self):
+        self.assertEqual(exercise.challenge_06(3), [3, 2, 1])
+        self.assertEqual(exercise.challenge_06(1), [1])
 
 
-# Allows test to be run from command line in additional to VS Code Test Explorer.
+    def test_challenge_07(self):
+        self.assertEqual(exercise.challenge_07(95), "Excellent")
+        self.assertEqual(exercise.challenge_07(80), "Good")
+        self.assertEqual(exercise.challenge_07(65), "Pass")
+        self.assertEqual(exercise.challenge_07(50), "Fail")
+
+
 if __name__ == "__main__":
     unittest.main()
