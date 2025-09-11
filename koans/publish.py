@@ -66,6 +66,14 @@ class Text:
         return len(lines[index]) - len(lines[index].lstrip())
 
 
+    @staticmethod
+    def has_documentation(line:str) -> bool:
+        return line.strip().startswith('"""') \
+            or line.strip().startswith("'''") \
+            or line.strip().endswith('"""') \
+            or line.strip().endswith("'''")
+
+
 
 class Publish:
 
@@ -138,6 +146,7 @@ class Publish:
         stubbed.append(lines[first])
 
         # Copy docstring if present.
+        # TODO: Consider copying the docstring content directly from the AST, then wrapping it.
         documentation:list[str] = Publish.get_documentation(lines, function)
         stubbed.extend(documentation)
 
@@ -159,18 +168,10 @@ class Publish:
         for line in lines[first:last]:
             if inside_block:
                 documentation.append(line)
-            elif Publish.has_documentation(line):
+            elif Text.has_documentation(line):
                 inside_block = not inside_block
                 documentation.append(line)
         return documentation
-
-
-    @staticmethod
-    def has_documentation(line:str) -> bool:
-        return line.strip().startswith('"""') \
-            or line.strip().startswith("'''") \
-            or line.strip().endswith('"""') \
-            or line.strip().endswith("'''")
 
 
 # Entry Point
