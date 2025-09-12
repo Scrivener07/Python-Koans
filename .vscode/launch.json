@@ -11,7 +11,7 @@
 			"module": "tooling.publish",
 			"console": "integratedTerminal",
 			"args": [
-				"${workspaceFolder}",
+				"${workspaceFolder}\\publish.json",
 				"${workspaceFolder}\\_dist"
 			]
 		},
