@@ -1,7 +1,13 @@
+# Project Folders
 /DOC/
 /_dist
+/_release
+
+# Project Files
 *.html
 *.pdf
+*.zip
+
 
 # Visual Studio Code (VSC)
 #---------------------------------------------
