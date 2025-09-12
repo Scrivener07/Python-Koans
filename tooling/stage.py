@@ -63,8 +63,11 @@ class Stage:
         vsc_source:str = os.path.join(source_path, Stage.VSC_FOLDER)
         if os.path.exists(vsc_source):
             vsc_destination:str = os.path.join(destination_path, Stage.VSC_FOLDER)
-            shutil.copytree(vsc_source, vsc_destination)
-            print(f"Copied: {Stage.VSC_FOLDER} folder")
+            try:
+                shutil.copytree(vsc_source, vsc_destination)
+                print(f"Copied: {Stage.VSC_FOLDER} folder")
+            except Exception as exception:
+                print(f"Error copying {Stage.VSC_FOLDER} folder: {exception}")
         else:
             print(f"Warning: {Stage.VSC_FOLDER} folder not found in source.")
 
@@ -84,7 +87,10 @@ class Stage:
         koans_destination:str = os.path.join(destination_path, Stage.KOAN_MODULE)
 
         # Create destination koans directory.
-        os.makedirs(koans_destination)
+        try:
+            os.makedirs(koans_destination)
+        except Exception as exception:
+            print(f"Error creating {Stage.KOAN_MODULE} directory: {exception}")
 
         # Copy only the essential files from koans module.
         for file in Stage.KOAN_FILES:
