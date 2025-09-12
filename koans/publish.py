@@ -183,4 +183,6 @@ if __name__ == "__main__":
     source_path:str = sys.argv[1]
     destination_path:str = sys.argv[2]
     Publish.main(source_path, destination_path)
-    print(f"\nPublished:\n- Source: '{source_path}'\n- Destination: '{destination_path}'")
+    print("\nPublished:")
+    print("- Source:".ljust(15), source_path)
+    print("- Destination:".ljust(15), destination_path)
