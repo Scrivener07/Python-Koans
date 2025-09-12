@@ -5,10 +5,32 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Publish Stub - File (Debug)",
+			"name": "Publish (Debug)",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "tooling.publish",
+			"console": "integratedTerminal",
+			"args": [
+				"${workspaceFolder}",
+				"${workspaceFolder}\\_dist"
+			]
+		},
+		{
+			"name": "Stage Project - Folder (Debug)",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "tooling.stage",
+			"console": "integratedTerminal",
+			"args": [
+				"${workspaceFolder}\\C01",
+				"${workspaceFolder}\\_dist\\C01"
+			]
+		},
+		{
+			"name": "Stub Exercise - File (Debug)",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "tooling.stub",
 			"console": "integratedTerminal",
 			"args": [
 				"${fileDirname}\\solution.py",
