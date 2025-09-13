@@ -16,10 +16,11 @@ class Stage:
 
     VSC_FOLDER:str = ".vscode"
     README_FILE:str = "README.md"
+    README_PDF_FILE:str = "README.pdf"
     SOLUTION_FILE:str = "solution.py"
     EXERCISE_FILE:str = "exercise.py"
     TEST_FILE:str = "exercise_test.py"
-    DISTRIBUTION_FILES:list[str] = [README_FILE, EXERCISE_FILE, TEST_FILE]
+    DISTRIBUTION_FILES:list[str] = [README_FILE, README_PDF_FILE, EXERCISE_FILE, TEST_FILE]
 
     KOAN_MODULE:str = "koans"
     KOAN_FILES:list[str] = ["__init__.py", "testing.py"]
@@ -27,6 +28,8 @@ class Stage:
 
     @staticmethod
     def main(source_path:str, destination_path:str) -> None:
+        if os.path.exists(destination_path):
+            raise FileExistsError(f"Error: Destination already exists: {destination_path}")
 
         # Create destination directory if it doesn't exist.
         os.makedirs(destination_path, exist_ok=True)
@@ -124,8 +127,8 @@ class Stage:
             print(f"Note: No koans import update needed in {Stage.TEST_FILE}")
 
         # Always ensure module is pointing to exercise, not solution.
-        TEST_IMPORT_FROM:str = "from . import solution as exercise"
-        TEST_IMPORT_TO:str = "from . import exercise"
+        TEST_IMPORT_FROM:str = "from . import solution"
+        TEST_IMPORT_TO:str = "import exercise as solution"
         if TEST_IMPORT_FROM in content:
             content = content.replace(TEST_IMPORT_FROM, TEST_IMPORT_TO)
         else:
@@ -145,8 +148,10 @@ if __name__ == "__main__":
         print("Usage: python stage.py <source_folder> <destination_folder>")
         print("Example: python stage.py C01 _dist/C01")
         sys.exit(1)
+
     source_path:str = sys.argv[1]
     destination_path:str = sys.argv[2]
+
     Stage.main(source_path, destination_path)
     print("\nTool:")
     print("- Source:".ljust(15), source_path)

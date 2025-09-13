@@ -3,7 +3,7 @@
 	"python.testing.unittestEnabled": true,
 	"python.testing.unittestArgs": [
 		"-v",
-		"-p", "*_test.py",
-		"-s", "${workspaceFolder}"
+		"-s", "${workspaceFolder}",
+		"-p", "*_test.py"
 	]
 }

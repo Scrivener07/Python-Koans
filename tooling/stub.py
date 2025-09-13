@@ -123,8 +123,10 @@ if __name__ == "__main__":
         print("Usage: python stub.py <source.py> <destination.py>")
         print("Example: python stub.py solution.py exercise.py")
         sys.exit(1)
+
     source_path:str = sys.argv[1]
     destination_path:str = sys.argv[2]
+
     Stub.main(source_path, destination_path)
     print("\nPublished:")
     print("- Source:".ljust(15), source_path)

@@ -5,6 +5,14 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Koan Runner",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "koans.testing",
+			"console": "integratedTerminal",
+			"args": []
+		},
+		{
 			"name": "Publish (Debug)",
 			"type": "debugpy",
 			"request": "launch",

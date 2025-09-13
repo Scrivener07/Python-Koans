@@ -22,6 +22,12 @@ from koans import koan
 def challenge_01():
     """
     Return the string 'Hello, World!'.
+
+    Returns:
+        `str`: The string 'Hello, World!'.
+
+    Hint:
+        Use the `return` keyword followed by a string literal.
     """
     return "Hello, World!"
 
