@@ -172,3 +172,138 @@ def challenge_16(value_float):
 def challenge_17():
     """Print the message `Hello, World!` to console exactly as shown using the `print()` function."""
     print("Hello, World!")
+
+
+# Challenge 18
+#--------------------------------------------------
+@koan
+def challenge_18(numbers):
+    """
+    Challenge: Sum of List
+
+    Instructions:
+        Return the sum of all numbers in the provided list.
+
+    Sample Data:
+        Input: [1, 2, 3]
+        Output: 6
+
+    Result Format:
+        Return the result as an integer.
+
+    Concepts:
+        List iteration, sum function
+
+    Returns:
+        int: The sum of the numbers
+    """
+    return sum(numbers)
+
+
+# Challenge 19
+#--------------------------------------------------
+@koan
+def challenge_19(text):
+    """
+    Challenge: String Length
+
+    Instructions:
+        Return the length of the provided string.
+
+    Sample Data:
+        Input: "Python"
+        Output: 6
+
+    Result Format:
+        Return the result as an integer.
+
+    Concepts:
+        String, len() function
+
+    Returns:
+        int: The length of the string
+    """
+    return len(text)
+
+
+# Challenge 20
+#--------------------------------------------------
+@koan
+def challenge_20(number):
+    """
+    Challenge: Even or Odd
+
+    Instructions:
+        Return "Even" if the number is even, "Odd" otherwise.
+
+    Sample Data:
+        Input: 4
+        Output: "Even"
+        Input: 7
+        Output: "Odd"
+
+    Result Format:
+        Return the result as a string.
+
+    Concepts:
+        Modulo operator, conditional statements
+
+    Returns:
+        str: "Even" or "Odd"
+    """
+    if number % 2 == 0:
+        return "Even"
+    else:
+        return "Odd"
+
+
+
+# Challenge 21
+#--------------------------------------------------
+@koan
+def challenge_21():
+    """
+    Challenge: Print a Friendly Message
+
+    Instructions:
+        Print "Welcome to Python Koans!" to the console.
+
+    Sample Data:
+        Output: Welcome to Python Koans!
+
+    Result Format:
+        Print the result using the print() function.
+
+    Concepts:
+        Standard output, print function
+
+    Returns:
+        None
+    """
+    print("Welcome to Python Koans!")
+
+
+# Challenge 22
+#--------------------------------------------------
+@koan
+def challenge_22(a, b):
+    """
+    Challenge: Maximum Value
+
+    Instructions:
+        Return the greater of two numbers.
+
+    Sample Data:
+        Input: 3, 5
+        Output: 5
+
+    Result Format:
+        Return the result as an integer.
+
+    Concepts:
+        Conditional statements, comparison operators
+
+    Returns:
+        int: The greater value
+    """
+    return max(a, b)

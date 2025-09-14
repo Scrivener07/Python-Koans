@@ -5,14 +5,15 @@ import unittest
 from unittest.mock import patch
 import io
 #--------------------------------------------------
-from koans.testing import KoanTester
+from koans.testing import KoanLauncher
 from . import solution
 #--------------------------------------------------
 
-class Testing(unittest.TestCase):
 
-    # Data Types and Variables
-    #--------------------------------------------------
+# Data Types and Variables
+#--------------------------------------------------
+class C01_1_Types(unittest.TestCase):
+
 
     def test_challenge_01(self):
         self.assertIsInstance(solution.challenge_01(), bool)
@@ -34,8 +35,27 @@ class Testing(unittest.TestCase):
         self.assertEqual(solution.challenge_04(), "Hello, World!")
 
 
-    # Arithmetic Operations
-    #--------------------------------------------------
+# Standard Input/Output
+#--------------------------------------------------
+class C01_1_Standard_IO(unittest.TestCase):
+    def test_challenge_17(self):
+        with patch("sys.stdout", new=io.StringIO()) as stdout:
+            solution.challenge_17()
+            data = stdout.getvalue().strip()
+            self.assertEqual(data, "Hello, World!")
+
+
+    def test_challenge_21(self):
+        with patch("sys.stdout", new=io.StringIO()) as stdout:
+            solution.challenge_21()
+            data = stdout.getvalue().strip()
+            self.assertEqual(data, "Welcome to Python Koans!")
+
+
+# Arithmetic Operations
+#--------------------------------------------------
+class C01_2_Arithmetic(unittest.TestCase):
+
 
     def test_challenge_05(self):
         self.assertEqual(solution.challenge_05(2, 3), 5)
@@ -61,20 +81,24 @@ class Testing(unittest.TestCase):
         self.assertEqual(solution.challenge_10(2, 3), 8)
 
 
-    # String Operations
-    #--------------------------------------------------
+# String Operations
+#--------------------------------------------------
+class C01_3_Strings(unittest.TestCase):
 
+
+    # Concatenation
     def test_challenge_11(self):
         self.assertEqual(solution.challenge_11("Hello", "World"), "HelloWorld")
 
 
+    # Repeatition
     def test_challenge_12(self):
         self.assertEqual(solution.challenge_12("AI!", 5), "AI!AI!AI!AI!AI!")
 
 
-    # Type Conversion
-    #--------------------------------------------------
-
+# Type Conversion
+#--------------------------------------------------
+class C01_4_Conversion(unittest.TestCase):
     def test_challenge_13(self):
         self.assertEqual(solution.challenge_13("42"), 42)
 
@@ -91,18 +115,37 @@ class Testing(unittest.TestCase):
         self.assertEqual(solution.challenge_16(0.85), "0.85")
 
 
-    # Standard Input/Output
-    #--------------------------------------------------
 
-    def test_challenge_17(self):
-        with patch('sys.stdout', new=io.StringIO()) as stdout:
-            solution.challenge_17()
-            data = stdout.getvalue().strip()
-            self.assertEqual(data, "Hello, World!")
+# List and String Operations
+#--------------------------------------------------
+class C01_6_List_String(unittest.TestCase):
+    def test_challenge_18(self):
+        self.assertEqual(solution.challenge_18([1, 2, 3]), 6)
+        self.assertEqual(solution.challenge_18([]), 0)
+        self.assertEqual(solution.challenge_18([-1, 1, 0]), 0)
 
+
+    def test_challenge_19(self):
+        self.assertEqual(solution.challenge_19("Python"), 6)
+        self.assertEqual(solution.challenge_19(""), 0)
+        self.assertEqual(solution.challenge_19("Koan"), 4)
+
+
+    def test_challenge_20(self):
+        self.assertEqual(solution.challenge_20(4), "Even")
+        self.assertEqual(solution.challenge_20(7), "Odd")
+        self.assertEqual(solution.challenge_20(0), "Even")
+        self.assertEqual(solution.challenge_20(-3), "Odd")
+
+
+    def test_challenge_22(self):
+        self.assertEqual(solution.challenge_22(3, 5), 5)
+        self.assertEqual(solution.challenge_22(10, 2), 10)
+        self.assertEqual(solution.challenge_22(-1, -5), -1)
+        self.assertEqual(solution.challenge_22(7, 7), 7)
 
 
 # Entry Point
 #--------------------------------------------------
 if __name__ == "__main__":
-    KoanTester.execute()
+    KoanLauncher.execute()

@@ -62,26 +62,19 @@ class KoanRunner(unittest.TextTestRunner):
 #--------------------------------------------------
 
 
-class KoanTester:
-    START_DIRECTORY:str = "."
+class KoanLauncher:
+    ARGUMENT_MODE:int = 1
+    MODE_DISCOVERY:str = "discovery"
+    MODE_IDENTITY:str = "identity"
+
+    # Discovery
+    ARGUMENT_TEST_PATTERN:int = 2
+    ARGUMENT_START_DIRECTORY:int = 3
     TEST_PATTERN:str = "*_test.py"
+    START_DIRECTORY:str = "."
 
-    @staticmethod
-    def main() -> None:
-        pattern:str = KoanTester.TEST_PATTERN
-        start:str = KoanTester.START_DIRECTORY
-
-        if len(sys.argv) > 1:
-            pattern = sys.argv[1]
-
-        if len(sys.argv) > 2:
-            start = sys.argv[2]
-
-        success:bool = KoanTester.start(pattern, start)
-        if success:
-            sys.exit(0)
-        else:
-            sys.exit(1)
+    # Identity
+    ARGUMENT_IDENTIFIER:int = 2
 
 
     @staticmethod
@@ -91,24 +84,57 @@ class KoanTester:
 
 
     @staticmethod
-    def start(pattern:str, start_directory:str) -> bool:
-        """Custom test loader that uses `KoanRunner`."""
-        # TODO: Learn more about this alternative way to get the default loader.
-        # test_loader:unittest.TestLoader = unittest.defaultTestLoader
+    def main() -> None:
+        mode:str = KoanLauncher.MODE_DISCOVERY
 
-        #  TODO: Learn more about patching unittest to always use custom result class.
-        # unittest.TextTestRunner.resultclass = KoanResult
+        if len(sys.argv) > KoanLauncher.ARGUMENT_MODE:
+            mode = sys.argv[KoanLauncher.ARGUMENT_MODE].lower()
 
-        # Load tests
+        if mode == KoanLauncher.MODE_DISCOVERY:
+            pattern:str = KoanLauncher.TEST_PATTERN
+            if len(sys.argv) > KoanLauncher.ARGUMENT_TEST_PATTERN:
+                pattern = sys.argv[KoanLauncher.ARGUMENT_TEST_PATTERN]
+
+            start_directory:str = KoanLauncher.START_DIRECTORY
+            if len(sys.argv) > KoanLauncher.ARGUMENT_START_DIRECTORY:
+                start_directory = sys.argv[KoanLauncher.ARGUMENT_START_DIRECTORY]
+
+            success:bool = KoanLauncher.start(start_directory, pattern)
+            if success:
+                sys.exit(0)
+            else:
+                sys.exit(1)
+
+        elif mode == KoanLauncher.MODE_IDENTITY:
+            identifier:str = ""
+            if len(sys.argv) > KoanLauncher.ARGUMENT_IDENTIFIER:
+                identifier = sys.argv[KoanLauncher.ARGUMENT_IDENTIFIER]
+
+            success:bool = KoanLauncher.start_identity(identifier)
+            if success:
+                sys.exit(0)
+            else:
+                sys.exit(1)
+        else:
+            print(f"Unknown mode: {mode}")
+            sys.exit(1)
+
+
+
+    @staticmethod
+    def start(start_directory:str, pattern:str) -> bool:
+        """Starts the Koan runner using test discovery with a directory pattern."""
         loader:unittest.TestLoader = unittest.TestLoader()
 
         # Discover tests
-        suite:unittest.TestSuite = KoanTester.discover(pattern, start_directory, loader)
+        suite:unittest.TestSuite = loader.discover(start_directory, pattern)
+        print(f"Found {len(suite._tests)} test modules with {suite.countTestCases()} cases matching pattern '{pattern}' in '{start_directory}'.")
+        print()
 
-        # Run tests with custom runner
-        result:KoanResult = KoanTester.run(suite)
+        # Run tests with custom runner.
+        result:KoanResult = KoanLauncher.run(suite)
 
-        # Check results.
+        # Check the results.
         status:bool = result.wasSuccessful()
         if status:
             print("\nAll tests passed! 🎉")
@@ -118,25 +144,44 @@ class KoanTester:
 
 
     @staticmethod
-    def discover(pattern:str, start_directory:str, loader:unittest.TestLoader) -> unittest.TestSuite:
+    def start_identity(identifier:str) -> bool:
         """
-        Discover tests in the specified directory matching the given pattern.
+        Run a single test by its fully qualified name.
+
+        ID: `<Folder>.<Module>.<Class>.<Method>`
+
+        Example: `C00.exercise_test.Testing.test_challenge_01`
         """
-        suite:unittest.TestSuite = loader.discover(start_directory, pattern)
-        return suite
+        loader:unittest.TestLoader = unittest.TestLoader()
+        suite:unittest.TestSuite = loader.loadTestsFromName(identifier)
+        if suite.countTestCases() == 0:
+            print(f"No test found for: {identifier}")
+            return False
+
+        # Run tests with custom runner.
+        result:KoanResult = KoanLauncher.run(suite)
+
+        # Check the results.
+        status:bool = result.wasSuccessful()
+        if status:
+            print(f"\n{identifier} passed! 🎉")
+        else:
+            print(f"\n{identifier} failed. Please review the messages above for hints.")
+        return status
 
 
     @staticmethod
-    def run(suite:unittest.TestSuite) -> KoanResult:
+    def run(suite:unittest.TestSuite, verbosity:int=2) -> KoanResult:
         """
         Run the test suite using `KoanRunner`.
         """
-        runner:KoanRunner = KoanRunner(verbosity=2)
+        runner:KoanRunner = KoanRunner(descriptions=True, verbosity=verbosity)
         result:KoanResult = runner.run(suite)
         return result
+
 
 
 # Entry Point (CLI)
 #--------------------------------------------------
 if __name__ == "__main__":
-    KoanTester.main()
+    KoanLauncher.main()

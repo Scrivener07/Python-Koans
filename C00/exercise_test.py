@@ -5,7 +5,7 @@ import unittest
 from unittest.mock import patch
 import io
 #--------------------------------------------------
-from koans.testing import KoanTester
+from koans.testing import KoanLauncher
 from . import solution
 #--------------------------------------------------
 
@@ -23,18 +23,18 @@ class Testing(unittest.TestCase):
         self.assertEqual(solution.challenge_02(), "Python!")
 
 
-    # Printing Output
+    # Printing Values
     #--------------------------------------------------
 
     def test_challenge_03(self):
-        with patch('sys.stdout', new=io.StringIO()) as stdout:
+        with patch("sys.stdout", new=io.StringIO()) as stdout:
             solution.challenge_03()
             data = stdout.getvalue().strip()
             self.assertEqual(data, "Hello, World!")
 
 
     def test_challenge_04(self):
-        with patch('sys.stdout', new=io.StringIO()) as stdout:
+        with patch("sys.stdout", new=io.StringIO()) as stdout:
             solution.challenge_04()
             data = stdout.getvalue().strip()
             self.assertEqual(data, "Python!")
@@ -57,4 +57,4 @@ class Testing(unittest.TestCase):
 # Entry Point
 #--------------------------------------------------
 if __name__ == "__main__":
-    KoanTester.execute()
+    KoanLauncher.execute()

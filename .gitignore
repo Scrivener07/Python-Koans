@@ -7,7 +7,7 @@
 *.html
 *.pdf
 *.zip
-
+*.ipynb
 
 # Visual Studio Code (VSC)
 #---------------------------------------------

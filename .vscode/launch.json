@@ -5,15 +5,61 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Koan Runner",
+			"name": "Koan",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "koans.testing",
 			"console": "integratedTerminal",
-			"args": []
+			"args": [
+				"discovery"
+			]
 		},
 		{
-			"name": "Publish (Debug)",
+			"name": "Koan: Folder",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "koans.testing",
+			"console": "integratedTerminal",
+			"args": [
+				"identity",
+				"C00"
+			]
+		},
+		{
+			"name": "Koan: Module",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "koans.testing",
+			"console": "integratedTerminal",
+			"args": [
+				"identity",
+				"C00.exercise_test"
+			]
+		},
+		{
+			"name": "Koan: Class",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "koans.testing",
+			"console": "integratedTerminal",
+			"args": [
+				"identity",
+				"C00.exercise_test.Testing"
+			]
+		},
+		{
+			"name": "Koan: Test",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "koans.testing",
+			"console": "integratedTerminal",
+			"args": [
+				"identity",
+				"C00.exercise_test.Testing.test_challenge_01"
+			]
+		},
+		{
+			"name": "Tool: Publish",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "tooling.publish",
@@ -24,7 +70,7 @@
 			]
 		},
 		{
-			"name": "Stage Project - Folder (Debug)",
+			"name": "Tool: Stage-Folder",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "tooling.stage",
@@ -35,7 +81,7 @@
 			]
 		},
 		{
-			"name": "Stub Exercise - File (Debug)",
+			"name": "Tool: Stub-File",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "tooling.stub",

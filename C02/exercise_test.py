@@ -3,7 +3,7 @@ Provides unit testing for koan 2.
 """
 import unittest
 #--------------------------------------------------
-from koans.testing import KoanTester
+from koans.testing import KoanLauncher
 from . import solution
 #--------------------------------------------------
 
@@ -33,8 +33,26 @@ class Testing(unittest.TestCase):
 
 
     def test_challenge_05(self):
-        self.assertEqual(solution.challenge_05(5), ["1", "2", "Fizz", "4", "Buzz"])
-        self.assertEqual(solution.challenge_05(15)[14], "FizzBuzz")
+        data:list[str] = [
+            "1",
+            "2",
+            "Fizz",
+            "4",
+            "Buzz",
+            "Fizz",
+            "7",
+            "8",
+            "Fizz",
+            "Buzz",
+            "11",
+            "Fizz",
+            "13",
+            "14",
+            "FizzBuzz"
+        ]
+        self.assertEqual(solution.challenge_05(5), data[0:5])
+        self.assertEqual(solution.challenge_05(10), data[0:10])
+        self.assertEqual(solution.challenge_05(15), data)
 
 
     def test_challenge_06(self):
@@ -49,8 +67,22 @@ class Testing(unittest.TestCase):
         self.assertEqual(solution.challenge_07(50), "Fail")
 
 
+    def test_challenge_08(self):
+        negative:list[int] = [0, 1, 2, 3, 4, 5]
+        self.assertEqual(solution.challenge_08(negative), 6)
+        positive:list[int] = [0, -1, -2, -3, -4, -5]
+        self.assertEqual(solution.challenge_08(positive), -6)
+
+
+    def test_challenge_09(self):
+        positive:list[int] = [0, 1, 2, 3, 4, 5]
+        self.assertEqual(solution.challenge_09(positive), 9)
+        negative:list[int] = [0, -1, -2, -3, -4, -5]
+        self.assertEqual(solution.challenge_09(negative), -9)
+
+
 
 # Entry Point
 #--------------------------------------------------
 if __name__ == "__main__":
-    KoanTester.execute()
+    KoanLauncher.execute()

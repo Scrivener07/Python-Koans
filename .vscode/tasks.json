@@ -4,13 +4,27 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Stub Exercise - File",
+			"label": "Koan",
 			"type": "shell",
 			"command": "${workspaceFolder}/.venv/Scripts/python.exe",
 			"args": [
-				"-m", "tooling.stub",
-				"${fileDirname}\\solution.py",
-				"${fileDirname}\\exercise.py"
+				"-m", "koans.testing",
+				"discovery"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Tool: Publish",
+			"type": "shell",
+			"command": "${workspaceFolder}/.venv/Scripts/python.exe",
+			"args": [
+				"-m", "tooling.publish",
+				"${workspaceFolder}\\publish.json",
+				"${workspaceFolder}\\_dist"
 			],
 			"group": {
 				"kind": "build",

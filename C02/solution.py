@@ -5,19 +5,15 @@ Please provide a solution for each coding challenge.
 """
 from koans import koan
 
-data = {
-    "Foo": "Bar"
-}
-
 
 # Challenge 1
 #--------------------------------------------------
 @koan
 def challenge_01(a, b):
     """
-    Return the sum of a and b using arithmetic operators.
+    Return the sum of `a` and `b` using arithmetic operators. 2
     """
-    pass
+    return a + b
 
 
 # Challenge 2
@@ -25,9 +21,9 @@ def challenge_01(a, b):
 @koan
 def challenge_02(a, b):
     """
-    Return True if a is greater than b, else False (comparison operator).
+    Return `True` if `a` is greater than `b`, else `False` (comparison operator).
     """
-    pass
+    return a > b
 
 
 # Challenge 3
@@ -35,19 +31,20 @@ def challenge_02(a, b):
 @koan
 def challenge_03(x, y):
     """
-    Return True only if both x and y are True (logical operator).
+    Return `True` only if both `x` and `y` are `True` (logical operator).
     """
-    pass
+    return x and y
 
 
 # Challenge 4
 #--------------------------------------------------
 @koan
-def challenge_04(n):
+def challenge_04(number):
     """
-    Assign n to a variable, increment it by 1 using assignment operator, and return the result.
+    Increment the `number` variable by 1 using assignment operator, and return the result.
     """
-    pass
+    number += 1
+    return number
 
 
 # Challenge 5
@@ -84,7 +81,11 @@ def challenge_06(start):
     """
     Return a list counting down from start to 1 using a while loop.
     """
-    pass
+    result = []
+    while start > 0:
+        result.append(start)
+        start -= 1
+    return result
 
 
 # Challenge 7
@@ -106,7 +107,14 @@ def challenge_07(score):
     Hint:
         Uses the `if`, `elif`, and `else` conditional statements.
     """
-    pass
+    if score >= 90:
+        return "Excellent"
+    elif score >= 75:
+        return "Good"
+    elif score >= 60:
+        return "Pass"
+    else:
+        return "Fail"
 
 
 # Challenge 8
@@ -125,5 +133,26 @@ def challenge_08(numbers):
     total = 0
     for number in numbers:
         if number % 2 == 0:
+            total += number
+    return total
+
+
+
+# Challenge 8
+#--------------------------------------------------
+@koan
+def challenge_09(numbers):
+    """
+    Return the sum of all odd numbers in the list `numbers`.
+
+    Provided Variables:
+        numbers (`list[int]`): A list of integers.
+
+    Returns:
+        `int`: The sum of all odd numbers in the provided list.
+    """
+    total = 0
+    for number in numbers:
+        if number % 2 != 0:
             total += number
     return total
