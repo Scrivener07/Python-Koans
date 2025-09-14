@@ -11,6 +11,7 @@ import os
 import sys
 import json
 from .stage import Stage
+from .notebooks import Book
 from .pack import Pack
 
 class Publish:
@@ -41,15 +42,35 @@ class Publish:
             project_name:str = os.path.basename(project_source)
             project_destination:str = os.path.join(destination_path, project_name)
 
-            # Verify the source exists and is a directory.
-            if os.path.exists(project_source) and os.path.isdir(project_source):
-                print(f"\nProcessing project: {project_name}")
-                print(f"- Source: {project_source}")
-                print(f"- Destination: {project_destination}")
-                Stage.main(project_source, project_destination)
-                Pack.archive(project_destination)
-            else:
-                print(f"Error: Source does not exist or is not a directory: {project_source}")
+            # Publish the project.
+            Publish.project(project_source, project_name, project_destination)
+
+
+    @staticmethod
+    def project(project_source:str, project_name:str, project_destination:str) -> None:
+        """
+        Publishes a single koan project.
+        """
+        # Verify the source to be valid.
+        if not os.path.exists(project_source):
+            print(f"Ignoring: Source does not exist: {project_source}")
+            return
+        elif not os.path.isdir(project_source):
+            print(f"Ignoring: Source is not a directory: {project_source}")
+            return
+
+        # Verify the destination to be valid.
+        if os.path.exists(project_destination):
+            print(f"Ignoring: Destination cannot already exist: {project_destination}")
+            return
+
+        print()
+        print(f"Publishing project: {project_name}")
+        print(f"- Source: {project_source}")
+        print(f"- Destination: {project_destination}")
+        Stage.main(project_source, project_destination)
+        Book.main(os.path.join(project_source, "solution.py"), os.path.join(project_destination, "koans.ipynb"), stub=False)
+        Pack.archive(project_destination)
 
 
     @staticmethod
@@ -82,7 +103,10 @@ if __name__ == "__main__":
     configuration_path:str = sys.argv[1]
     destination_path:str = sys.argv[2]
 
+    print()
+    print(f"{__loader__.name}:")
+    print("- Configuration:".ljust(16), configuration_path)
+    print("- Destination:".ljust(16), destination_path)
+    print()
     Publish.main(configuration_path, destination_path)
-    print("\nPublishing:")
-    print("- Configuration:".ljust(15), configuration_path)
-    print("- Destination:".ljust(15), destination_path)
+    print()

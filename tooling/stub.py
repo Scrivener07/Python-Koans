@@ -127,7 +127,10 @@ if __name__ == "__main__":
     source_path:str = sys.argv[1]
     destination_path:str = sys.argv[2]
 
-    Stub.main(source_path, destination_path)
-    print("\nPublished:")
+    print()
+    print(f"{__loader__.name}:")
     print("- Source:".ljust(15), source_path)
     print("- Destination:".ljust(15), destination_path)
+    print()
+    Stub.main(source_path, destination_path)
+    print()

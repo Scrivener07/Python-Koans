@@ -20,16 +20,29 @@ class Stage:
     SOLUTION_FILE:str = "solution.py"
     EXERCISE_FILE:str = "exercise.py"
     TEST_FILE:str = "exercise_test.py"
-    DISTRIBUTION_FILES:list[str] = [README_FILE, README_PDF_FILE, EXERCISE_FILE, TEST_FILE]
+    DISTRIBUTION_FILES:list[str] = [
+        README_FILE,
+        README_PDF_FILE,
+        EXERCISE_FILE,
+        TEST_FILE
+    ]
 
     KOAN_MODULE:str = "koans"
-    KOAN_FILES:list[str] = ["__init__.py", "testing.py"]
+    KOAN_FILES:list[str] = [
+        "__init__.py",
+        "testing.py"
+    ]
 
 
     @staticmethod
     def main(source_path:str, destination_path:str) -> None:
+        if not os.path.exists(source_path):
+            raise FileNotFoundError(f"Error: Source does not exist: {source_path}")
+        elif not os.path.isdir(source_path):
+            raise NotADirectoryError(f"Error: Source is not a directory: {source_path}")
+
         if os.path.exists(destination_path):
-            raise FileExistsError(f"Error: Destination already exists: {destination_path}")
+            raise FileExistsError(f"Error: Destination cannot already exist: {destination_path}")
 
         # Create destination directory if it doesn't exist.
         os.makedirs(destination_path, exist_ok=True)
@@ -152,7 +165,10 @@ if __name__ == "__main__":
     source_path:str = sys.argv[1]
     destination_path:str = sys.argv[2]
 
-    Stage.main(source_path, destination_path)
-    print("\nTool:")
+    print()
+    print(f"{__loader__.name}:")
     print("- Source:".ljust(15), source_path)
     print("- Destination:".ljust(15), destination_path)
+    print()
+    Stage.main(source_path, destination_path)
+    print()
