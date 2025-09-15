@@ -70,6 +70,18 @@
 			]
 		},
 		{
+			"name": "Tool: Notebook-File",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "tooling.notebooks",
+			"console": "integratedTerminal",
+			"args": [
+				"${file}",
+				"${fileDirname}\\koan.ipynb",
+				"false"
+			]
+		},
+		{
 			"name": "Tool: Stage-Folder",
 			"type": "debugpy",
 			"request": "launch",

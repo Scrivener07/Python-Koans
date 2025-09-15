@@ -35,7 +35,14 @@ class Book:
         # Add module docstring as the first markdown cell if present.
         module_doc:str|None = ast.get_docstring(tree)
         if module_doc:
-            module_doc_node:nbformat.NotebookNode = new_markdown_cell(module_doc)
+            md = [
+                f"# **{os.path.basename(solution_path)}**",
+                "",
+                module_doc,
+                ""
+            ]
+
+            module_doc_node:nbformat.NotebookNode = new_markdown_cell("\n".join(md))
             cells.append(module_doc_node)
 
         # Process each top-level node in the AST.
@@ -58,7 +65,13 @@ class Book:
         # Build function docstring as markdown cell if present.
         function_doc:str|None = ast.get_docstring(function)
         if function_doc:
-            function_doc_node:nbformat.NotebookNode = new_markdown_cell(function_doc)
+            md = [
+                f"## `{function.name}`",
+                "",
+                function_doc,
+                ""
+            ]
+            function_doc_node:nbformat.NotebookNode = new_markdown_cell("\n".join(md))
             cells.append(function_doc_node)
 
         # Prepare function arguments.
