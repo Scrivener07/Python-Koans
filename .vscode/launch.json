@@ -5,7 +5,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Koan",
+			"name": "Koan: Discovery",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "koans.testing",
@@ -15,7 +15,7 @@
 			]
 		},
 		{
-			"name": "Koan: Folder",
+			"name": "Koan: Identity-Folder",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "koans.testing",
@@ -26,7 +26,7 @@
 			]
 		},
 		{
-			"name": "Koan: Module",
+			"name": "Koan: Identity-Module",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "koans.testing",
@@ -37,7 +37,7 @@
 			]
 		},
 		{
-			"name": "Koan: Class",
+			"name": "Koan: Identity-Class",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "koans.testing",
@@ -48,7 +48,7 @@
 			]
 		},
 		{
-			"name": "Koan: Test",
+			"name": "Koan: Identity-Test",
 			"type": "debugpy",
 			"request": "launch",
 			"module": "koans.testing",
@@ -67,6 +67,17 @@
 			"args": [
 				"${workspaceFolder}\\publish.json",
 				"${workspaceFolder}\\_dist"
+			]
+		},
+		{
+			"name": "Tool: Publish to extension",
+			"type": "debugpy",
+			"request": "launch",
+			"module": "tooling.publish",
+			"console": "integratedTerminal",
+			"args": [
+				"${workspaceFolder}\\publish.json",
+				"..\\Python-Koans-VSC\\example\\files"
 			]
 		},
 		{
