@@ -10,10 +10,10 @@ from . import solution
 #--------------------------------------------------
 
 
-# Data Types and Variables
-#--------------------------------------------------
-class C01_1_Types(unittest.TestCase):
+class Testing(unittest.TestCase):
 
+    # Data Types and Variables
+    #--------------------------------------------------
 
     def test_challenge_01(self):
         self.assertIsInstance(solution.challenge_01(), bool)
@@ -35,9 +35,9 @@ class C01_1_Types(unittest.TestCase):
         self.assertEqual(solution.challenge_04(), "Hello, World!")
 
 
-# Standard Input/Output
-#--------------------------------------------------
-class C01_1_Standard_IO(unittest.TestCase):
+    # Standard Input/Output
+    #--------------------------------------------------
+
     def test_challenge_17(self):
         with patch("sys.stdout", new=io.StringIO()) as stdout:
             solution.challenge_17()
@@ -52,10 +52,8 @@ class C01_1_Standard_IO(unittest.TestCase):
             self.assertEqual(data, "Welcome to Python Koans!")
 
 
-# Arithmetic Operations
-#--------------------------------------------------
-class C01_2_Arithmetic(unittest.TestCase):
-
+    # Arithmetic Operations
+    #--------------------------------------------------
 
     def test_challenge_05(self):
         self.assertEqual(solution.challenge_05(2, 3), 5)
@@ -81,10 +79,8 @@ class C01_2_Arithmetic(unittest.TestCase):
         self.assertEqual(solution.challenge_10(2, 3), 8)
 
 
-# String Operations
-#--------------------------------------------------
-class C01_3_Strings(unittest.TestCase):
-
+    # String Operations
+    #--------------------------------------------------
 
     # Concatenation
     def test_challenge_11(self):
@@ -96,9 +92,9 @@ class C01_3_Strings(unittest.TestCase):
         self.assertEqual(solution.challenge_12("AI!", 5), "AI!AI!AI!AI!AI!")
 
 
-# Type Conversion
-#--------------------------------------------------
-class C01_4_Conversion(unittest.TestCase):
+    # Type Conversion
+    #--------------------------------------------------
+
     def test_challenge_13(self):
         self.assertEqual(solution.challenge_13("42"), 42)
 
@@ -116,9 +112,9 @@ class C01_4_Conversion(unittest.TestCase):
 
 
 
-# List and String Operations
-#--------------------------------------------------
-class C01_6_List_String(unittest.TestCase):
+    # List and String Operations
+    #--------------------------------------------------
+
     def test_challenge_18(self):
         self.assertEqual(solution.challenge_18([1, 2, 3]), 6)
         self.assertEqual(solution.challenge_18([]), 0)
@@ -148,4 +144,4 @@ class C01_6_List_String(unittest.TestCase):
 # Entry Point
 #--------------------------------------------------
 if __name__ == "__main__":
-    KoanLauncher.execute()
+    KoanLauncher.main()

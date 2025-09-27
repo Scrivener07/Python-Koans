@@ -85,4 +85,4 @@ class Testing(unittest.TestCase):
 # Entry Point
 #--------------------------------------------------
 if __name__ == "__main__":
-    KoanLauncher.execute()
+    KoanLauncher.main()
