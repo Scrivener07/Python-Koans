@@ -7,9 +7,9 @@ See:
 - https://docs.python.org/3/library/unittest.html#unittest.TestResult
 """
 import sys
+from enum import Enum
 from typing import override
 import unittest
-
 
 # TODO: Emoji characters need further testing.
 #   They may not render correctly in all terminals or environments.
@@ -62,6 +62,16 @@ class KoanRunner(unittest.TextTestRunner):
 #--------------------------------------------------
 
 
+class ExitCode(Enum):
+    Success = 0
+    """Complete success (all tests passed)."""
+    Failure = 1
+    """Functional failure (tests ran but some failed)."""
+    Error = 2
+    """System failures (test runner itself had problems)."""
+
+
+
 class KoanLauncher:
     ARGUMENT_MODE:int = 1
     MODE_DISCOVERY:str = "discovery"
@@ -80,6 +90,7 @@ class KoanLauncher:
     @staticmethod
     def execute() -> None:
         """Execute tests using `KoanRunner`."""
+        # TODO: Calling this will not work as expected without passing the module containing unit test classes.
         unittest.main(testRunner=KoanRunner())
 
 
@@ -99,34 +110,34 @@ class KoanLauncher:
             if len(sys.argv) > KoanLauncher.ARGUMENT_START_DIRECTORY:
                 start_directory = sys.argv[KoanLauncher.ARGUMENT_START_DIRECTORY]
 
-            success:bool = KoanLauncher.start(start_directory, pattern)
+            success:bool = KoanLauncher.run_discover(start_directory, pattern)
             if success:
-                sys.exit(0)
+                sys.exit(ExitCode.Success)
             else:
-                sys.exit(1)
+                sys.exit(ExitCode.Failure)
 
         elif mode == KoanLauncher.MODE_IDENTITY:
             identifier:str = ""
             if len(sys.argv) > KoanLauncher.ARGUMENT_IDENTIFIER:
                 identifier = sys.argv[KoanLauncher.ARGUMENT_IDENTIFIER]
 
-            success:bool = KoanLauncher.start_identity(identifier)
+            success:bool = KoanLauncher.run_identity(identifier)
             if success:
-                sys.exit(0)
+                sys.exit(ExitCode.Success)
             else:
-                sys.exit(1)
+                sys.exit(ExitCode.Failure)
         else:
             print(f"Unknown mode: {mode}")
-            sys.exit(1)
+            sys.exit(ExitCode.Error)
 
 
 
     @staticmethod
-    def start(start_directory:str, pattern:str) -> bool:
+    def run_discover(start_directory:str, pattern:str) -> bool:
         """Starts the Koan runner using test discovery with a directory pattern."""
         loader:unittest.TestLoader = unittest.TestLoader()
 
-        # Discover tests
+        # Discover tests that match the given pattern.
         suite:unittest.TestSuite = loader.discover(start_directory, pattern)
         print(f"Found {len(suite._tests)} test modules with {suite.countTestCases()} cases matching pattern '{pattern}' in '{start_directory}'.")
         print()
@@ -144,15 +155,18 @@ class KoanLauncher:
 
 
     @staticmethod
-    def start_identity(identifier:str) -> bool:
+    def run_identity(identifier:str) -> bool:
         """
         Run a single test by its fully qualified name.
+        This may run multiple tests depending on the given identity specifier.
 
         ID: `<Folder>.<Module>.<Class>.<Method>`
 
         Example: `C00.exercise_test.Testing.test_challenge_01`
         """
         loader:unittest.TestLoader = unittest.TestLoader()
+
+        # Load tests that match the given identity.
         suite:unittest.TestSuite = loader.loadTestsFromName(identifier)
         if suite.countTestCases() == 0:
             print(f"No test found for: {identifier}")
