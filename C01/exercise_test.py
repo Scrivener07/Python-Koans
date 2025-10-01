@@ -5,7 +5,7 @@ import unittest
 from unittest.mock import patch
 import io
 #--------------------------------------------------
-from koans.testing import KoanLauncher
+from koans.launcher import KoanLauncher
 from . import solution
 #--------------------------------------------------
 

@@ -8,9 +8,10 @@
 			"name": "Koan: Discovery",
 			"type": "debugpy",
 			"request": "launch",
-			"module": "koans.testing",
+			"module": "koans.launcher",
 			"console": "integratedTerminal",
 			"args": [
+				"terminal",
 				"discovery"
 			]
 		},
@@ -18,9 +19,10 @@
 			"name": "Koan: Identity-Folder",
 			"type": "debugpy",
 			"request": "launch",
-			"module": "koans.testing",
+			"module": "koans.launcher",
 			"console": "integratedTerminal",
 			"args": [
+				"terminal",
 				"identity",
 				"C00"
 			]
@@ -29,9 +31,10 @@
 			"name": "Koan: Identity-Module",
 			"type": "debugpy",
 			"request": "launch",
-			"module": "koans.testing",
+			"module": "koans.launcher",
 			"console": "integratedTerminal",
 			"args": [
+				"terminal",
 				"identity",
 				"C00.exercise_test"
 			]
@@ -40,9 +43,10 @@
 			"name": "Koan: Identity-Class",
 			"type": "debugpy",
 			"request": "launch",
-			"module": "koans.testing",
+			"module": "koans.launcher",
 			"console": "integratedTerminal",
 			"args": [
+				"terminal",
 				"identity",
 				"C00.exercise_test.Testing"
 			]
@@ -51,9 +55,10 @@
 			"name": "Koan: Identity-Test",
 			"type": "debugpy",
 			"request": "launch",
-			"module": "koans.testing",
+			"module": "koans.launcher",
 			"console": "integratedTerminal",
 			"args": [
+				"terminal",
 				"identity",
 				"C00.exercise_test.Testing.test_challenge_01"
 			]

@@ -3,7 +3,7 @@ Provides unit testing for koan 2.
 """
 import unittest
 #--------------------------------------------------
-from koans.testing import KoanLauncher
+from koans.launcher import KoanLauncher
 from . import solution
 #--------------------------------------------------
 

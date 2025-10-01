@@ -75,6 +75,8 @@ class Stub:
             Stub.stub_function(lines, koan_function)
 
 
+    # TODO: This does not properly stub the function body in all cases.
+    #       In particular, lesson 1, challenge 20.
     @staticmethod
     def stub_function(lines:list[str], function:ast.FunctionDef) -> None:
         # Store the first and last line index of the function definition.
@@ -103,16 +105,18 @@ class Stub:
 
     @staticmethod
     def get_documentation(lines:list[str], function:ast.FunctionDef) -> list[str]:
-        first:int = function.lineno - 1
-        last:int = function.end_lineno - 1
+        first:int = function.lineno
+        last:int = function.end_lineno
         documentation:list[str] = []
         inside_block:bool = False
         for line in lines[first:last]:
-            if inside_block:
-                documentation.append(line)
-            elif Text.has_documentation(line):
+            if Text.has_documentation(line):
                 inside_block = not inside_block
                 documentation.append(line)
+            elif inside_block:
+                documentation.append(line)
+            else:
+                break
         return documentation
 
 

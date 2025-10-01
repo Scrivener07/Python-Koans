@@ -20,17 +20,22 @@ class Stage:
     SOLUTION_FILE:str = "solution.py"
     EXERCISE_FILE:str = "exercise.py"
     TEST_FILE:str = "exercise_test.py"
+    KOAN_FILE:str = "exercise.koan"
     DISTRIBUTION_FILES:list[str] = [
         README_FILE,
         README_PDF_FILE,
         EXERCISE_FILE,
-        TEST_FILE
+        TEST_FILE,
+        KOAN_FILE
     ]
 
     KOAN_MODULE:str = "koans"
     KOAN_FILES:list[str] = [
         "__init__.py",
-        "testing.py"
+        "launcher.py",
+        "framework.py",
+        "terminal.py",
+        "client.py"
     ]
 
 
@@ -132,8 +137,8 @@ class Stage:
             content = file.read()
 
         # Replace relative koans import with local import if needed.
-        KOAN_IMPORT_FROM:str = "from ..koans.testing import KoanRunner"
-        KOAN_IMPORT_TO:str = "from koans.testing import KoanRunner"
+        KOAN_IMPORT_FROM:str = "from ..koans.launcher import KoanLauncher"
+        KOAN_IMPORT_TO:str = "from koans.launcher import KoanLauncher"
         if KOAN_IMPORT_FROM in content:
             content = content.replace(KOAN_IMPORT_FROM, KOAN_IMPORT_TO)
         else:

@@ -1,0 +1,5 @@
+{
+    "test": "exercise_test.py",
+    "exercise": "exercise.py",
+    "solution": "solution.py"
+}
