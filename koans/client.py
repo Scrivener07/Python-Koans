@@ -6,6 +6,9 @@ See:
 - https://docs.python.org/3/library/unittest.html#unittest.TextTestRunner
 - https://docs.python.org/3/library/unittest.html#unittest.TestResult
 """
+import json
+import os
+import sys
 import unittest
 from typing import Any, override
 from koans.framework import ResultStatus
@@ -129,7 +132,7 @@ class ClientService:
         loader:unittest.TestLoader = unittest.TestLoader()
         suite:unittest.TestSuite = loader.loadTestsFromName(identifier)
         result:ClientResult = ClientService.run(suite)
-        print(result.encode())
+        ClientService.output_json(result.encode())
         return result.wasSuccessful()
 
 
@@ -138,3 +141,14 @@ class ClientService:
         runner:ClientRunner = ClientRunner()
         result:ClientResult = runner.run(suite)
         return result
+
+
+    @staticmethod
+    def output_json(data) -> None:
+        """Use file descriptor 3 for JSON results."""
+        try:
+            with os.fdopen(3, "w") as json_output:
+                json.dump(data, json_output)
+        except:
+            # Fallback if FD 3 isn't available
+            sys.stderr.write("__JSON__" + json.dumps(data))

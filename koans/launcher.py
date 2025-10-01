@@ -2,8 +2,8 @@ import sys
 import unittest
 from enum import Enum
 from types import ModuleType
-from koans.client import ClientService, ClientRunner, ClientResult
-from koans.terminal import TerminalService, TerminalRunner, TerminalResult
+from koans.client import ClientService
+from koans.terminal import TerminalService, TerminalRunner
 
 
 class ExitCode(int, Enum):
@@ -113,7 +113,7 @@ class KoanLauncher:
 #--------------------------------------------------
 # Usage: python -m koans.launcher <source_folder> <destination_folder>
 # Example:
-#   python -m koans.launcher identity exercise_test.Testing.test_challenge_01
+#   python -m koans.launcher terminal identity exercise_test.Testing.test_challenge_01
 # Example:
 #   python -m koans.launcher client identity exercise_test.Testing.test_challenge_01
 
